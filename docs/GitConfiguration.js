@@ -1,12 +1,14 @@
 // docs/GitConfiguration.js
 
+import { teamConfig, replacePlaceholders } from '../config/team-config.js';
+
 export const GitConfiguration = {
-    title: "Git Setup and Configuration for OSEA",
-    description: "Complete Git configuration including identity setup, SSH keys, and OSEA-specific workflows",
+    title: "Git Setup and Configuration",
+    description: replacePlaceholders("Complete Git configuration including identity setup, SSH keys, and {teamName} workflows"),
     
     overview: {
-      purpose: "Version control and collaboration for OSEA development",
-      requirements: ["Git identity configuration", "SSH key setup", "GitHub access", "OSEA workflow understanding"],
+      purpose: replacePlaceholders("Version control and collaboration for {teamName} development"),
+      requirements: ["Git identity configuration", "SSH key setup", "GitHub access", replacePlaceholders("{teamName} workflow understanding")],
       estimatedTime: "15-30 minutes"
     },
   
@@ -20,8 +22,8 @@ export const GitConfiguration = {
           '# Set your name (use your full name)',
           'git config --global user.name "Your Full Name"',
           '',
-          '# Set your email (use your OSEA email)',
-          'git config --global user.email "your.email@oseamalibu.com"',
+          '# Set your email (use your team email)',
+          `git config --global user.email "your.email@${teamConfig.communication.email.split('@')[1] || 'company.com'}"`,
           '',
           '# Verify your configuration',
           'git config --global --list | grep user'
@@ -29,7 +31,7 @@ export const GitConfiguration = {
         
         explanation: [
           "Your name appears in commit history and pull requests",
-          "Use your professional OSEA email address",
+          replacePlaceholders("Use your professional {teamName} email address"),
           "Global configuration applies to all repositories on your machine",
           "These settings can be overridden per repository if needed"
         ],
@@ -40,7 +42,7 @@ export const GitConfiguration = {
           "To change later: Simply re-run the commands with new values"
         ],
         
-        successCriteria: "git config --global --list shows your correct name and OSEA email"
+        successCriteria: replacePlaceholders("git config --global --list shows your correct name and {teamName} email")
       },
   
       {
@@ -49,8 +51,8 @@ export const GitConfiguration = {
         description: "Create an SSH key pair for secure authentication with GitHub",
         
         commands: [
-          '# Generate a new SSH key (use your OSEA email)',
-          'ssh-keygen -t ed25519 -C "your.email@oseamalibu.com"',
+          '# Generate a new SSH key (use your team email)',
+          `ssh-keygen -t ed25519 -C "your.email@${teamConfig.communication.email.split('@')[1] || 'company.com'}"`,
           '',
           '# When prompted for file location, press Enter for default',
           '# When prompted for passphrase, you can press Enter for no passphrase',
@@ -113,7 +115,7 @@ export const GitConfiguration = {
           "Click your profile picture → Settings",
           "Click 'SSH and GPG keys' in the left sidebar",
           "Click 'New SSH key' button",
-          "Give it a title like 'OSEA Development Machine'",
+          replacePlaceholders("Give it a title like '{teamName} Development Machine'"),
           "Paste your public key in the 'Key' field",
           "Click 'Add SSH key'"
         ],
@@ -166,7 +168,7 @@ export const GitConfiguration = {
         ],
         
         explanation: [
-          "Default branch 'main' matches OSEA repository structure",
+          replacePlaceholders("Default branch 'main' matches {teamName} repository structure"),
           "Colored output makes Git easier to read",
           "VS Code integration for commit messages and conflict resolution",
           "Line ending configuration prevents cross-platform issues",
@@ -179,13 +181,13 @@ export const GitConfiguration = {
           'git config --global alias.graph "log --oneline --graph --decorate --all"'
         ],
         
-        successCriteria: "Git configuration optimized for OSEA development workflow"
+        successCriteria: replacePlaceholders("Git configuration optimized for {teamName} development workflow")
       }
     ],
   
-    oseaWorkflow: {
-      title: "OSEA Git Workflow",
-      description: "Understanding how OSEA uses Git for collaboration and deployment",
+    teamWorkflow: {
+      title: replacePlaceholders("{teamName} Git Workflow"),
+      description: replacePlaceholders("Understanding how {teamName} uses Git for collaboration and deployment"),
       
       branchStructure: {
         main: {

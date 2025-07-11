@@ -1,7 +1,7 @@
 {
-  "name": "osea-onboarding-system",
+  "name": "team-onboarding-system",
   "version": "1.0.0",
-  "description": "A comprehensive, modular onboarding system that generates personalized setup documentation for OSEA development team members",
+  "description": "A comprehensive, modular onboarding system that generates personalized setup documentation for development team members",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -21,20 +21,20 @@
     "developer-tools",
     "documentation",
     "react",
-    "osea",
+    "team-setup",
     "setup-guide",
     "personalized-docs"
   ],
-  "author": "OSEA Development Team",
+  "author": "Development Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osea-malibu/osea-onboarding-system.git"
+    "url": "https://github.com/mirabelle514/onboarding-your-team.git"
   },
   "bugs": {
-    "url": "https://github.com/osea-malibu/osea-onboarding-system/issues"
+    "url": "https://github.com/mirabelle514/onboarding-your-team/issues"
   },
-  "homepage": "https://github.com/osea-malibu/osea-onboarding-system#readme",
+  "homepage": "https://github.com/mirabelle514/onboarding-your-team#readme",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

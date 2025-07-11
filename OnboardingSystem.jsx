@@ -11,6 +11,7 @@ import { RepositorySetup } from './docs/RepositorySetup';
 import { GitConfiguration } from './docs/GitConfiguration';
 import { VSCodeSetup } from './docs/VSCodeSetup';
 import { questionnaire } from './config/questionnaire.jsx';
+import { teamConfig, replacePlaceholders } from './config/team-config.js';
 
 const OnboardingSystem = () => {
   const [currentStep, setCurrentStep] = useState('questionnaire');
@@ -79,9 +80,9 @@ const OnboardingSystem = () => {
     }
 
     return {
-      title: `OSEA Onboarding Guide`,
+      title: replacePlaceholders(teamConfig.welcome.title),
       subtitle: `${experience.charAt(0).toUpperCase() + experience.slice(1)} ${RoleConfigs[role].title} - ${platform.charAt(0).toUpperCase() + platform.slice(1)}`,
-      welcomeMessage: `Welcome to OSEA! This streamlined guide is customized for your profile as a ${experience} ${RoleConfigs[role].title.toLowerCase()} on ${platform}.`,
+      welcomeMessage: replacePlaceholders(`Welcome to ${teamConfig.team.name}! This streamlined guide is customized for your profile as a ${experience} ${RoleConfigs[role].title.toLowerCase()} on ${platform}.`),
       
       sections: sections,
       roleConfig: RoleConfigs[role],
@@ -168,7 +169,10 @@ const OnboardingSystem = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `osea-onboarding-${userProfile.role}-${new Date().toISOString().split('T')[0]}.md`;
+    link.download = replacePlaceholders(teamConfig.export.filename
+      .replace('{teamName}', teamConfig.team.name)
+      .replace('{role}', userProfile.role)
+      .replace('{date}', new Date().toISOString().split('T')[0]));
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -192,11 +196,11 @@ const OnboardingSystem = () => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <Layers className="w-10 h-10 text-blue-600" />
               <h1 className="text-4xl font-bold text-gray-900">
-                OSEA Developer Onboarding
+                {replacePlaceholders(teamConfig.welcome.title)}
               </h1>
             </div>
             <p className="text-xl text-gray-600 mb-4">
-              Streamlined, personalized setup documentation
+              {replacePlaceholders(teamConfig.welcome.description)}
             </p>
             <p className="text-gray-600">
               Generate a focused onboarding guide tailored to your experience, platform, and role.

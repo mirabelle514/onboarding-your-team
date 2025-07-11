@@ -1,4 +1,4 @@
-// index.js - Main entry point for OSEA Onboarding System
+// index.js - Main entry point for Team Onboarding System
 
 // Import all documentation modules
 export { PlatformSetups } from './docs/PlatformSetups';
@@ -11,6 +11,7 @@ export { VSCodeSetup } from './docs/VSCodeSetup';
 
 // Import configuration
 export { questionnaire } from './config/questionnaire.jsx';
+export { teamConfig, getTeamContent, replacePlaceholders } from './config/team-config.js';
 
 // Import main component
 export { default as OnboardingSystem } from './OnboardingSystem';
@@ -18,13 +19,14 @@ export { default as OnboardingSystem } from './OnboardingSystem';
 /*
 PROJECT STRUCTURE:
 
-osea-onboarding-system/
+team-onboarding-system/
 ├── index.js                          # Main entry point and exports
 ├── OnboardingSystem.jsx              # Main React component
 ├── package.json                      # Dependencies and scripts
 ├── README.md                         # Project documentation
 │
 ├── config/
+│   ├── team-config.js                # Team configuration
 │   └── questionnaire.js              # Questionnaire configuration
 │
 ├── docs/                             # Documentation modules
@@ -32,7 +34,7 @@ osea-onboarding-system/
 │   ├── RoleConfigs.js                # Role-specific configurations
 │   ├── ExperienceGuidance.js         # Experience level guidance
 │   ├── DevelopmentWorkflow.js        # 3-terminal workflow documentation
-│   ├── RepositorySetup.js            # Ocean theme repository setup
+│   ├── RepositorySetup.js            # Repository setup (uses team config)
 │   ├── GitConfiguration.js          # Git setup and workflow
 │   └── VSCodeSetup.js                # VS Code configuration
 │
@@ -60,6 +62,7 @@ USAGE EXAMPLES:
 // Import specific modules
 import { PlatformSetups } from './docs/PlatformSetups';
 import { RoleConfigs } from './docs/RoleConfigs';
+import { teamConfig } from './config/team-config.js';
 
 // Use in component
 const macSetup = PlatformSetups.mac;
@@ -96,6 +99,11 @@ EXTENDING THE SYSTEM:
    - Import in OnboardingSystem.jsx
    - Update document generation logic
 
+5. Customizing for your team:
+   - Edit config/team-config.js
+   - Update team information, repository details, and communication channels
+   - Add custom sections specific to your team
+
 MAINTENANCE:
 
 - Each documentation module is independent
@@ -107,7 +115,7 @@ MAINTENANCE:
 DEPLOYMENT:
 
 - Can be deployed as standalone React app
-- Can be integrated into existing OSEA admin dashboard
+- Can be integrated into existing team admin dashboard
 - Documentation can be exported as static markdown files
 - Can be packaged as NPM module for reuse
 
@@ -128,14 +136,6 @@ export const CONFIG = {
   SUPPORTED_PLATFORMS: ['mac', 'windows', 'linux'],
   SUPPORTED_ROLES: ['frontend', 'fullstack', 'designer', 'content'],
   SUPPORTED_EXPERIENCE_LEVELS: ['beginner', 'intermediate', 'advanced'],
-  
-  // Repository information
-  REPOSITORY: {
-    name: 'ocean-theme',
-    organization: 'osea-malibu',
-    url: 'https://github.com/osea-malibu/ocean-theme',
-    branches: ['main', 'main-2', 'main-3', 'staging']
-  },
   
   // Documentation settings
   DOCUMENTATION: {
@@ -194,6 +194,9 @@ export const utils = {
     const platform = userProfile.platform || 'unknown';
     const role = userProfile.role || 'developer';
     
-    return `osea-onboarding-${role}-${platform}-${date}.md`;
+    return replacePlaceholders(teamConfig.export.filename
+      .replace('{teamName}', teamConfig.team.name)
+      .replace('{role}', role)
+      .replace('{date}', date));
   }
 };

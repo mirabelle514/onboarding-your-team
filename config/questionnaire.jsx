@@ -50,25 +50,25 @@ export const questionnaire = [
     ]
   },
   {
-    id: 'shopifyExperience',
-    question: 'How familiar are you with Shopify development?',
+    id: 'frameworkExperience',
+    question: 'How familiar are you with the main framework?',
     type: 'single',
     icon: <Code className="w-5 h-5" />,
     options: [
       { 
         value: 'none', 
         label: 'No experience', 
-        desc: 'Never worked with Shopify themes or Liquid' 
+        desc: 'Never worked with this framework before' 
       },
       { 
         value: 'basic', 
         label: 'Basic knowledge', 
-        desc: 'Some exposure to Shopify admin or basic theme edits' 
+        desc: 'Some exposure to the framework and its concepts' 
       },
       { 
         value: 'experienced', 
         label: 'Experienced', 
-        desc: 'Built or modified Shopify themes before' 
+        desc: 'Built applications with this framework before' 
       }
     ]
   },
@@ -122,9 +122,9 @@ export const questionnaire = [
         desc: 'CLI tools and commands' 
       },
       { 
-        value: 'shopify', 
-        label: 'Shopify/Liquid', 
-        desc: 'Shopify development experience' 
+        value: 'framework', 
+        label: 'Main Framework', 
+        desc: 'Experience with the primary framework' 
       },
       { 
         value: 'tailwind', 
@@ -162,7 +162,7 @@ export const questionnaire = [
       { 
         value: 'architecture', 
         label: 'Learn codebase', 
-        desc: 'Understand theme structure' 
+        desc: 'Understand project structure and architecture' 
       }
     ]
   }
